@@ -9,8 +9,8 @@ import javax.persistence.*;
 public class Utilisateur {
 
     @Id
-    @GeneratedValue
     @Column(name="Code")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long code;
 
     @Column(name="Pseudo")

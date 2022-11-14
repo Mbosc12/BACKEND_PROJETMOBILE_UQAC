@@ -13,8 +13,8 @@ import java.util.List;
 public class Circuit {
 
     @Id
-    @GeneratedValue
     @Column(name="Code")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long code;
 
     @Column(name="Nom")
