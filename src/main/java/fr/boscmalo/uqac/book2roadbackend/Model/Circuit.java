@@ -13,6 +13,7 @@ import java.util.List;
 public class Circuit {
 
     @Id
+    @GeneratedValue
     @Column(name="Code")
     private Long code;
 

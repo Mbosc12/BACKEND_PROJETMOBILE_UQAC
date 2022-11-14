@@ -9,6 +9,7 @@ import javax.persistence.*;
 public class Utilisateur {
 
     @Id
+    @GeneratedValue
     @Column(name="Code")
     private Long code;
 
