@@ -28,7 +28,7 @@ public class CircuitController {
      * @return
      */
     @RequestMapping(value="/circuits/{code}", method = RequestMethod.GET)
-    public List<Circuit> getById(@PathVariable Long code) {
+    public Circuit getById(@PathVariable Long code) {
         return circuitRepository.findCircuitsById(code);
     }
 

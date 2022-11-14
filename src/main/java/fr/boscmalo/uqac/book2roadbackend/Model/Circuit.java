@@ -35,9 +35,9 @@ public class Circuit {
     @Column(name="Description")
     private String description;
 
-    @OneToMany(mappedBy="circuit")
-    @JsonManagedReference
-    private List<Tarif> tarif;
+    //@OneToMany(mappedBy="circuit")
+    //@JsonManagedReference
+    //private List<Tarif> tarif;
 
     public Long getCode() {
         return code;
@@ -87,11 +87,11 @@ public class Circuit {
         this.description = description;
     }
 
-    public List<Tarif> getTarif() {
-        return tarif;
-    }
+    //public List<Tarif> getTarif() {
+      //  return tarif;
+    //}
 
-    public void setTarif(List<Tarif> tarif) {
-        this.tarif = tarif;
-    }
+    //public void setTarif(List<Tarif> tarif) {
+      //  this.tarif = tarif;
+    //}
 }

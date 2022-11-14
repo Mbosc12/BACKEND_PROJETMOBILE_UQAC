@@ -13,7 +13,7 @@ public interface CircuitRepository extends JpaRepository<Circuit, Long> {
     @Query(
             value = "SELECT * FROM Circuit C WHERE C.code = ?1",
             nativeQuery = true)
-    List<Circuit> findCircuitsById(Long param);
+    Circuit findCircuitsById(Long param);
 
     @Query(
             value = "SELECT * FROM Circuit C WHERE C.Nom LIKE %:nom%",
