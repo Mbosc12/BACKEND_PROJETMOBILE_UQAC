@@ -14,7 +14,7 @@ public class Circuit {
 
     @Id
     @Column(name="Code")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long code;
 
     @Column(name="Nom")

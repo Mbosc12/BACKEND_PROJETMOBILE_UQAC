@@ -1,7 +1,9 @@
 package fr.boscmalo.uqac.book2roadbackend.Controller;
 
 import fr.boscmalo.uqac.book2roadbackend.Model.Circuit;
+import fr.boscmalo.uqac.book2roadbackend.Model.Ville;
 import fr.boscmalo.uqac.book2roadbackend.Repository.CircuitRepository;
+import fr.boscmalo.uqac.book2roadbackend.Repository.VilleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,9 @@ import java.util.List;
 public class CircuitController {
     @Autowired
     private CircuitRepository circuitRepository;
+
+    @Autowired
+    private VilleRepository villeRepository;
 
     /**
      * Get all tracks
@@ -58,6 +63,9 @@ public class CircuitController {
      */
     @RequestMapping(value="/circuits", method = RequestMethod.POST)
     public void setCircuit(@RequestBody Circuit c) {
+
+        Ville v = villeRepository.findVilleById(12000);
+        c.setVille(v);
         circuitRepository.save(c);
     }
 
