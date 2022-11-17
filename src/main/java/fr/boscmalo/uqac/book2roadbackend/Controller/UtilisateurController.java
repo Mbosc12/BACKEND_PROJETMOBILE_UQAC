@@ -58,7 +58,7 @@ public class UtilisateurController {
         return (utilisateurRepository.connection(user, mdp) > 0);
     }
 
-    @PostMapping("/utilisateur")
+    @RequestMapping(value="/utilisateur", method = RequestMethod.POST)
     public void userRegister(@RequestBody Utilisateur u) {
         Ville v = villeRepository.findVilleById(12000);
         u.setVille(v);
