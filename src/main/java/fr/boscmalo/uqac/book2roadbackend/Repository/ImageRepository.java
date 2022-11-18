@@ -12,7 +12,7 @@ import java.util.List;
 public interface ImageRepository extends JpaRepository<Image, Long> {
 
     @Query(
-            value = "SELECT * FROM Image I WHERE I.Codecircuit = :code",
+            value = "SELECT I.code, I.lien, I.codecircuit FROM Image I WHERE I.Codecircuit = :code",
             nativeQuery = true)
     List<Image> getImageByCircuit(Integer code);
 

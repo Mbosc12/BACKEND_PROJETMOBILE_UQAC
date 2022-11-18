@@ -47,7 +47,7 @@ public class ImageController {
             BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imageByte));
 
             //get circuit;
-            Circuit c = circuitRepository.findCircuitsById(i.getCircuit().getCode());
+            Circuit c = circuitRepository.findCircuitsById(i.getCodeCircuit());
             // path : idUser/idCircuit/idImage
             String pathImage = c.getUtilisateur().getCode() + "\\\\" + c.getCode() + "\\\\";
             // path to save image;

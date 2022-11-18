@@ -16,10 +16,15 @@ public class Image {
     @Column(name="Lien")
     private String lien;
 
+    /*
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Codecircuit", nullable = false)
     @JsonIgnoreProperties(value = {"Circuit", "hibernateLazyInitializer"})
     private Circuit circuit;
+     */
+
+    @Column(name="Codecircuit")
+    private long codeCircuit;
 
     public Long getCode() {
         return code;
@@ -37,11 +42,22 @@ public class Image {
         this.lien = lien;
     }
 
+    /*
     public Circuit getCircuit() {
         return circuit;
     }
 
     public void setCircuit(Circuit circuit) {
         this.circuit = circuit;
+    }
+
+     */
+
+    public long getCodeCircuit() {
+        return codeCircuit;
+    }
+
+    public void setCodeCircuit(long codeCircuit) {
+        this.codeCircuit = codeCircuit;
     }
 }
