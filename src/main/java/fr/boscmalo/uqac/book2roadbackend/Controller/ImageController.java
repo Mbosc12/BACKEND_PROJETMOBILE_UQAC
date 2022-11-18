@@ -1,5 +1,6 @@
 package fr.boscmalo.uqac.book2roadbackend.Controller;
 
+import com.querydsl.core.util.FileUtils;
 import fr.boscmalo.uqac.book2roadbackend.Model.Circuit;
 import fr.boscmalo.uqac.book2roadbackend.Model.Image;
 import fr.boscmalo.uqac.book2roadbackend.Repository.CircuitRepository;
@@ -11,6 +12,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -28,8 +30,18 @@ public class ImageController {
     private CircuitRepository circuitRepository;
 
     @GetMapping("/images")
-    public List<Image> getAll(@RequestParam(value="code") Integer code) {
-        return imageRepository.getImageByCircuit(code);
+    public List<Image> getAll(@RequestParam(value="code") Integer code) throws IOException {
+        List<Image> listImage = imageRepository.getImageByCircuit(code);
+        for(Image i : listImage) {
+            Circuit c = circuitRepository.findCircuitsById(i.getCodeCircuit());
+            File image = new File("C:\\\\image_projet_mobile\\\\" + i.getLien() + i.getCode() + ".png");
+            FileInputStream fin = new FileInputStream(image);
+            byte[] bytes = Files.readAllBytes(Paths.get("C:\\\\image_projet_mobile\\\\" + i.getLien() + i.getCode() + ".png"));
+            String encodedFile = Base64.getEncoder().encodeToString(bytes);
+            i.setLien(encodedFile);
+        }
+
+        return listImage;
     }
 
     @PostMapping("/images")
