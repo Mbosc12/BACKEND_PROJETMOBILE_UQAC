@@ -62,11 +62,12 @@ public class CircuitController {
      * @param c
      */
     @RequestMapping(value="/circuits", method = RequestMethod.POST)
-    public void setCircuit(@RequestBody Circuit c) {
+    public long setCircuit(@RequestBody Circuit c) {
 
         Ville v = villeRepository.findVilleById(12000);
         c.setVille(v);
         circuitRepository.save(c);
+        return c.getCode();
     }
 
 }

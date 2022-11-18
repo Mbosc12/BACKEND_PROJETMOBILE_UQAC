@@ -10,7 +10,7 @@ public class Utilisateur {
 
     @Id
     @Column(name="Code")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     private Long code;
 
     @Column(name="Pseudo")
