@@ -13,6 +13,8 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Base64;
 import java.util.List;
 
@@ -33,11 +35,12 @@ public class ImageController {
     @PostMapping("/images")
     public void setImage(@RequestBody List<Image> images) throws IOException {
         for(Image i : images) {
-            //get all datas from image
-            //String image64 = i.getLien().split(",")[1];
+            //save to get id
             String image64 = i.getLien();
-            //String extension = i.getLien().split("/")[1].split(";")[0];
-            String extension = "jpg";
+            String extension = "png";
+
+            i.setLien("temp");
+            imageRepository.save(i);
 
             //create image
             byte[] imageByte = Base64.getDecoder().decode(image64.getBytes(StandardCharsets.UTF_8));
@@ -45,11 +48,11 @@ public class ImageController {
 
             //get circuit;
             Circuit c = circuitRepository.findCircuitsById(i.getCircuit().getCode());
-
             // path : idUser/idCircuit/idImage
-            String pathImage = i.getCircuit().getUtilisateur().getCode() + "\\\\" + i.getCircuit().getCode() + "\\\\" + i.getCode() + "." + extension;
+            String pathImage = c.getUtilisateur().getCode() + "\\\\" + c.getCode() + "\\\\";
             // path to save image;
-            File image = new File("C:\\\\image_projet_mobile\\\\" + pathImage);
+            Files.createDirectories(Paths.get("C:\\\\image_projet_mobile\\\\" + pathImage));
+            File image = new File("C:\\\\image_projet_mobile\\\\" + pathImage + i.getCode() + "." + extension);
             ImageIO.write(bufferedImage, extension, image);
 
             // change string to image link
