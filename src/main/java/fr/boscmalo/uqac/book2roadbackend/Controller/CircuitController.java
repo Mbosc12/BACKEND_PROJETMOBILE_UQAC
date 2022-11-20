@@ -44,7 +44,7 @@ public class CircuitController {
      */
     @RequestMapping(value="/circuits/search", method = RequestMethod.GET)
     public List<Circuit> getByName(@RequestParam(value="nom") String nom) {
-        return circuitRepository.findCircuitsByName(nom);
+        return circuitRepository.findCircuitsByName(nom.toUpperCase());
     }
 
     /**

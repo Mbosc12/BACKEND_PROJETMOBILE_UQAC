@@ -16,7 +16,7 @@ public interface CircuitRepository extends JpaRepository<Circuit, Long> {
     Circuit findCircuitsById(Long param);
 
     @Query(
-            value = "SELECT * FROM Circuit C WHERE C.Nom LIKE %:nom%",
+            value = "SELECT * FROM Circuit C WHERE UPPER(C.Nom) LIKE %:nom%",
             nativeQuery = true)
     List<Circuit> findCircuitsByName(String nom);
 

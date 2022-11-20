@@ -15,11 +15,6 @@ public class TarifController {
     private TarifRepository tarifRepository;
 
     @GetMapping("/tarifs")
-    public List<Tarif> getAll() {
-        return tarifRepository.findAll();
-    }
-
-    @GetMapping("/tarifs")
     public List<Tarif> getTarifByCodeCircuit(@RequestParam(value="code") Integer code) {
         return tarifRepository.findAll();
     }
