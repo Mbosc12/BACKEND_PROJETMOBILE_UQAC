@@ -3,6 +3,7 @@ package fr.boscmalo.uqac.book2roadbackend.Controller;
 import fr.boscmalo.uqac.book2roadbackend.Model.Circuit;
 import fr.boscmalo.uqac.book2roadbackend.Model.Ville;
 import fr.boscmalo.uqac.book2roadbackend.Repository.CircuitRepository;
+import fr.boscmalo.uqac.book2roadbackend.Repository.ImageRepository;
 import fr.boscmalo.uqac.book2roadbackend.Repository.VilleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,6 +18,9 @@ public class CircuitController {
 
     @Autowired
     private VilleRepository villeRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     /**
      * Get all tracks
@@ -70,4 +74,11 @@ public class CircuitController {
         return c.getCode();
     }
 
+    @RequestMapping(value="/circuits", method = RequestMethod.DELETE)
+    public void removeCircuit(@RequestBody Circuit c) {
+        //TODO SUPPRIMER IMAGE
+        //TODO SUPPRIMER TARIFS
+        //TODO GARDER RESERVATIONS?
+        circuitRepository.delete(c);
+    }
 }
