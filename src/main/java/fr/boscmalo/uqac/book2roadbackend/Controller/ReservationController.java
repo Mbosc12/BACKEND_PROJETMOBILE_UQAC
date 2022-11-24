@@ -6,6 +6,7 @@ import fr.boscmalo.uqac.book2roadbackend.Repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -16,6 +17,11 @@ public class ReservationController {
     @RequestMapping(value="/reservation/{codeCircuit}", method = RequestMethod.GET)
     public List<Reservation> getAll(@PathVariable Long codeCircuit) {
         return reservationRepository.findReservationByCircuit(codeCircuit);
+    }
+
+    @RequestMapping(value="/reservation", method= RequestMethod.GET)
+    public List<Reservation> getAllByUser(@PathParam(value="user") Long codeUser) {
+        return reservationRepository.findReservationByUser(codeUser);
     }
 
     @RequestMapping(value="/reservation/check")

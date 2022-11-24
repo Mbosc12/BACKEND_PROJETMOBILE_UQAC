@@ -17,6 +17,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
             nativeQuery = true)
     List<Reservation> findReservationByCircuit (Long codeCircuit);
 
+    @Query(
+            value = "SELECT * FROM Reservation R WHERE R.Codeutilisateur = ?1",
+            nativeQuery = true)
+    List<Reservation> findReservationByUser (Long codeUtilisateur);
 
     @Query(
             value = "SELECT COUNT(*) FROM RESERVATION R WHERE R.codeCircuit = :codeCircuit AND " +
