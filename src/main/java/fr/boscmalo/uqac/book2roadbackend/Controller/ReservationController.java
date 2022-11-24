@@ -20,7 +20,7 @@ public class ReservationController {
     }
 
     @RequestMapping(value="/reservation", method= RequestMethod.GET)
-    public List<Reservation> getAllByUser(@PathParam(value="user") Long codeUser) {
+    public List<Reservation> getAllByUser(@RequestParam(value="user") Long codeUser) {
         return reservationRepository.findReservationByUser(codeUser);
     }
 
