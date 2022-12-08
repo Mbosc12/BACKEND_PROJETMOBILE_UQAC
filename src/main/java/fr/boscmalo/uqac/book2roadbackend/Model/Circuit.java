@@ -1,11 +1,10 @@
 package fr.boscmalo.uqac.book2roadbackend.Model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import fr.boscmalo.uqac.book2roadbackend.Repository.UtilisateurRepository;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,6 +37,26 @@ public class Circuit {
 
     @Column(name="Tarif")
     private float tarif;
+
+    @OneToMany
+    @JoinTable(
+            name="CIRCUIT_RESERVATION",
+            joinColumns = @JoinColumn(name="Codecircuit"),
+            inverseJoinColumns = @JoinColumn(name="Codereservation")
+    )
+    private List<Reservation> reservations = new ArrayList<>();
+
+    @OneToMany
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinTable(
+            name="FAVORIS",
+            joinColumns = @JoinColumn(name="Codecircuit"),
+            inverseJoinColumns = @JoinColumn(name="Codeutilisateur")
+    )
+    private List<Utilisateur> favorisUtilisateurs = new ArrayList<>();
+
+    @Column(name="Region")
+    private Long codeRegion;
 
     public Long getCode() {
         return code;
@@ -93,5 +112,29 @@ public class Circuit {
 
     public void setTarif(float tarif) {
         this.tarif = tarif;
+    }
+
+    public List<Reservation> getReservations() {
+        return reservations;
+    }
+
+    public void setReservations(List<Reservation> reservations) {
+        this.reservations = reservations;
+    }
+
+    public Long getCodeRegion() {
+        return codeRegion;
+    }
+
+    public void setCodeRegion(Long codeRegion) {
+        this.codeRegion = codeRegion;
+    }
+
+    public List<Utilisateur> getFavorisUtilisateurs() {
+        return favorisUtilisateurs;
+    }
+
+    public void setFavorisUtilisateurs(List<Utilisateur> favorisUtilisateurs) {
+        this.favorisUtilisateurs = favorisUtilisateurs;
     }
 }

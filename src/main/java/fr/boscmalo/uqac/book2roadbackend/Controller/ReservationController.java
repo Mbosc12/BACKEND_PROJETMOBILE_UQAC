@@ -14,6 +14,11 @@ public class ReservationController {
     @Autowired
     private ReservationRepository reservationRepository;
 
+    @RequestMapping(value="/reservations", method= RequestMethod.GET)
+    public List<Reservation> get() {
+        return reservationRepository.findAll();
+    }
+
     @RequestMapping(value="/reservation/{codeCircuit}", method = RequestMethod.GET)
     public List<Reservation> getAll(@PathVariable Long codeCircuit) {
         return reservationRepository.findReservationByCircuit(codeCircuit);

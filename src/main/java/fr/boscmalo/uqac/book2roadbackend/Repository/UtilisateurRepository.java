@@ -26,4 +26,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> 
             nativeQuery = true)
     Utilisateur getUser(String pseudo);
 
+    @Query(
+            value = "SELECT * FROM Utilisateur U WHERE U.Code = :code",
+            nativeQuery = true)
+    Utilisateur getById(Long code);
+
 }

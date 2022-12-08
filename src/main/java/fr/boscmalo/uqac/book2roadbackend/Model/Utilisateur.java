@@ -34,6 +34,9 @@ public class Utilisateur {
     @Column(name="Adresse")
     private String adresse;
 
+    @Column(name="Avatar")
+    private String image;
+
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "codepostal", nullable = false)
     @JsonIgnoreProperties(value = {"Ville", "hibernateLazyInitializer"})
@@ -109,5 +112,13 @@ public class Utilisateur {
 
     public void setVille(Ville ville) {
         this.ville = ville;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

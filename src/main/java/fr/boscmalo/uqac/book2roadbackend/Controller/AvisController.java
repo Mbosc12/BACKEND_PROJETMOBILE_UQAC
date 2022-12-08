@@ -30,6 +30,8 @@ public class AvisController {
         return avisRepository.findAvisByUser(codeUser);
     }
 
+    @RequestMapping(value="/avis/average/{codeCircuit}", method = RequestMethod.GET)
+    public Float getAverage(@PathVariable Long codeCircuit) { return avisRepository.findAverage(codeCircuit); }
 
     @RequestMapping(value="/avis", method = RequestMethod.POST)
     public void setAvis(@RequestBody Avis avis) {

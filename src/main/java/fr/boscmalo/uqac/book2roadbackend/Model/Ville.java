@@ -18,7 +18,6 @@ public class Ville {
     @Column(name="Latitude")
     private String latitude;
 
-
     @Column(name="Longitude")
     private String longitude;
 
