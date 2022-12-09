@@ -1,8 +1,11 @@
 package fr.boscmalo.uqac.book2roadbackend.Controller;
 
 import fr.boscmalo.uqac.book2roadbackend.Model.Avis;
+import fr.boscmalo.uqac.book2roadbackend.Model.Circuit;
 import fr.boscmalo.uqac.book2roadbackend.Model.Reservation;
 import fr.boscmalo.uqac.book2roadbackend.Repository.AvisRepository;
+import fr.boscmalo.uqac.book2roadbackend.Repository.CircuitRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,9 @@ import java.util.List;
 public class AvisController {
     @Autowired
     private AvisRepository avisRepository;
+   
+    @Autowired
+    private CircuitRepository circuitRepository;
 
     @RequestMapping(value="/avis/{codeCircuit}", method = RequestMethod.GET)
     public List<Avis> getAll(@PathVariable Long codeCircuit) {
@@ -36,6 +42,32 @@ public class AvisController {
     @RequestMapping(value="/avis", method = RequestMethod.POST)
     public void setAvis(@RequestBody Avis avis) {
     	avisRepository.save(avis);
+    }
+    
+    @RequestMapping(value="/avis/nb", method = RequestMethod.GET)
+    public int getNbAvis(@RequestParam(value="user") int codeUser) {
+    	List<Circuit> listCircuit = circuitRepository.findCircuitsByUser(codeUser);
+    	if(listCircuit.size() == 0 ) { return 0; }
+    	int nbAvis = 0;
+    	for(Circuit c : listCircuit) {
+    		nbAvis += avisRepository.findNbAvis(c.getCode());
+    	}
+    	    	
+    	return nbAvis;
+    }
+    
+    @RequestMapping(value="/avis/user", method = RequestMethod.GET)
+    public Float getAverageByUser(@RequestParam(value="user") int codeUser) {
+    	List<Circuit> listCircuit = circuitRepository.findCircuitsByUser(codeUser);
+    	if(listCircuit.size() == 0 ) { return null; }
+    	Float f = 0f;
+    	int nbAvis = 0;
+    	for(Circuit c : listCircuit) {
+    		f += (avisRepository.findScore(c.getCode()) != null) ? avisRepository.findScore(c.getCode()) : 0;
+    		nbAvis += avisRepository.findNbAvis(c.getCode());
+    	}
+    	    	
+    	return f/nbAvis;
     }
 
     @RequestMapping(value="/avis", method = RequestMethod.DELETE)

@@ -45,7 +45,6 @@ public class UtilisateurController {
     @GetMapping("/utilisateur")
     public Utilisateur getUser(@RequestParam(value="user") String user) throws IOException {
         Utilisateur u = utilisateurRepository.getUser(user);
-
         byte[] bytes = Files.readAllBytes(Paths.get("C:\\\\image_projet_mobile\\\\" + u.getCode() + "\\\\userImage\\\\avatar.png"));
         String encodedFile = Base64.getEncoder().encodeToString(bytes);
         u.setImage(encodedFile);

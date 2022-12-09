@@ -10,6 +10,7 @@ public class Avis {
 
     @Id
     @Column(name="Code")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long code;
 
     @Column(name="Codeutilisateur")

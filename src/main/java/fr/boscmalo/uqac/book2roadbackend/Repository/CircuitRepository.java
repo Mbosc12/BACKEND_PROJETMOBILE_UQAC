@@ -29,8 +29,8 @@ QuerydslBinderCustomizer<QCircuit> {
         bindings.bind(circuit.nom).first(new SingleValueBinding<StringPath, String>() {
             @Override
             public Predicate bind(StringPath path, String value) {
-                return path.contains(value);
-            }
+                return path.contains(value.toLowerCase());
+          }
         });
 
         bindings.bind(circuit.codeRegion).first(new SingleValueBinding<NumberPath<Long>, Long>() {
@@ -67,5 +67,10 @@ QuerydslBinderCustomizer<QCircuit> {
             value = "SELECT * FROM Circuit C WHERE C.Codeproprietaire = :code",
             nativeQuery = true)
     List<Circuit> findCircuitsByUser(int code);
+    
+    @Query(
+    		value = "SELECT COUNT(*) FROM Circuit C WHERE C.Codeproprietaire = :code",
+    		nativeQuery = true)
+    int findNbCircuit(int code);
 
 }

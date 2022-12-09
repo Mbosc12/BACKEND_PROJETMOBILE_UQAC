@@ -107,6 +107,7 @@ public class CircuitController {
         Ville v = c.getVille();
 
         v.setLongitude("NaN"); v.setLatitude("NaN");
+        c.setNom(c.getNom().toLowerCase());
 
         Departement d = departementRepository.findDepartementById(Long.valueOf(String.valueOf(v.getCodePostal()).substring(0, 2)));
         v.setDepartement(d);
@@ -120,5 +121,10 @@ public class CircuitController {
     @RequestMapping(value="/circuits", method = RequestMethod.DELETE)
     public void removeCircuit(@RequestBody Circuit c) {
         circuitRepository.delete(c);
+    }
+    
+    @RequestMapping(value="/circuits/nb", method = RequestMethod.GET)
+    public int getNbCircuit(@RequestParam(value="user") int intUser) {
+    	return circuitRepository.findNbCircuit(intUser);
     }
 }

@@ -24,9 +24,25 @@ public interface AvisRepository extends JpaRepository<Avis, Long> {
     List<Avis> findAvisByUser (Long codeUtilisateur);
     
     @Query(
-            value= "SELECT SUM(A.Etoiles)/COUNT(*) FROM AVIS A WHERE A.Codecircuit = :codeCircuit",
+            value= "SELECT SUM(A.Etoiles)/COUNT(*) FROM Avis A WHERE A.codeCircuit = :codeCircuit",
             nativeQuery = true)
     Float findAverage(Long codeCircuit);
+    
+    @Query(
+            value= "SELECT SUM(A.Etoiles) FROM Avis A WHERE A.codeCircuit = :codeCircuit",
+            nativeQuery = true)
+    Float findScore(Long codeCircuit);
+    
+    @Query(
+            value= "SELECT COUNT(*) FROM Avis A WHERE A.codeCircuit = :codeCircuit",
+            nativeQuery = true)
+    int findNbAvis(Long codeCircuit);
+    
+    @Query(
+            value= "SELECT COUNT(*) FROM Avis A WHERE A.codeUtilisateur = :codeUtilisateur",
+            nativeQuery = true)
+    int findNbAvisUser(Long codeUtilisateur);
+
 
     @Query(
             value= "SELECT codeCircuit FROM (SELECT SUM(A.Etoiles)/COUNT(*) AS Moyenne, A.codeCircuit FROM AVIS A GROUP BY codeCircuit ORDER BY Moyenne DESC)",
