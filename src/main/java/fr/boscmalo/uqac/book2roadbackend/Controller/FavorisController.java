@@ -2,6 +2,7 @@ package fr.boscmalo.uqac.book2roadbackend.Controller;
 
 import fr.boscmalo.uqac.book2roadbackend.Model.Circuit;
 import fr.boscmalo.uqac.book2roadbackend.Model.Departement;
+import fr.boscmalo.uqac.book2roadbackend.Model.Favoris;
 import fr.boscmalo.uqac.book2roadbackend.Repository.CircuitRepository;
 import fr.boscmalo.uqac.book2roadbackend.Repository.DepartementRepository;
 import fr.boscmalo.uqac.book2roadbackend.Repository.FavorisRepository;
@@ -33,6 +34,11 @@ public class FavorisController {
         }
         
     	return circuits;
+    }
+    
+    @RequestMapping(value="/favoris", method = RequestMethod.POST)
+    public void setFavoris(@RequestBody Favoris fav) {
+    	favorisRepository.save(fav);
     }
 
 }
