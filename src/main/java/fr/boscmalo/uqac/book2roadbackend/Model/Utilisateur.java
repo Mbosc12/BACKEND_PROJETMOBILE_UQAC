@@ -2,6 +2,9 @@ package fr.boscmalo.uqac.book2roadbackend.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -41,6 +44,7 @@ public class Utilisateur {
     @JoinColumn(name = "codepostal", nullable = false)
     @JsonIgnoreProperties(value = {"Ville", "hibernateLazyInitializer"})
     private Ville ville;
+   
 
     public Long getCode() {
         return code;
@@ -121,4 +125,5 @@ public class Utilisateur {
     public void setImage(String image) {
         this.image = image;
     }
+    
 }

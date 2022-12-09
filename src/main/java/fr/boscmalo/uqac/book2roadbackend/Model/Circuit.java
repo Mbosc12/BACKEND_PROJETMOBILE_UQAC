@@ -46,14 +46,6 @@ public class Circuit {
     )
     private List<Reservation> reservations = new ArrayList<>();
 
-    @OneToMany
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-    @JoinTable(
-            name="FAVORIS",
-            joinColumns = @JoinColumn(name="Codecircuit"),
-            inverseJoinColumns = @JoinColumn(name="Codeutilisateur")
-    )
-    private List<Utilisateur> favorisUtilisateurs = new ArrayList<>();
 
     @Column(name="Region")
     private Long codeRegion;
@@ -129,12 +121,5 @@ public class Circuit {
     public void setCodeRegion(Long codeRegion) {
         this.codeRegion = codeRegion;
     }
-
-    public List<Utilisateur> getFavorisUtilisateurs() {
-        return favorisUtilisateurs;
-    }
-
-    public void setFavorisUtilisateurs(List<Utilisateur> favorisUtilisateurs) {
-        this.favorisUtilisateurs = favorisUtilisateurs;
-    }
+    
 }
