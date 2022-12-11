@@ -18,4 +18,9 @@ public interface FavorisRepository extends JpaRepository<Favoris, Long> {
             nativeQuery = true)
     List<Long> findFavoris(Long codeUtilisateur);
 
+    
+    @Query(
+    		value= "SELECT COUNT(*) FROM Favoris F WHERE F.codeUtilisateur = :codeUtilisateur AND F.codeCircuit = :codeCircuit",
+    		nativeQuery = true)
+    int isFavoris(Long codeUtilisateur, Long codeCircuit);
 }

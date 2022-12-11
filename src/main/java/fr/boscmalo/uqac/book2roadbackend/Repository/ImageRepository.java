@@ -14,6 +14,6 @@ public interface ImageRepository extends JpaRepository<Image, Long> {
     @Query(
             value = "SELECT I.code, I.lien, I.codecircuit FROM Image I WHERE I.Codecircuit = :code",
             nativeQuery = true)
-    List<Image> getImageByCircuit(Integer code);
+    List<Image> getImageByCircuit(Long code);
 
 }

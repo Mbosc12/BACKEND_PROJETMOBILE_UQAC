@@ -40,5 +40,16 @@ public class FavorisController {
     public void setFavoris(@RequestBody Favoris fav) {
     	favorisRepository.save(fav);
     }
+    
+    @RequestMapping(value="/favoris", method = RequestMethod.DELETE)
+    public void removeFavoris(@RequestBody Favoris fav) {
+    	favorisRepository.delete(fav);
+    }
+    
+    @RequestMapping(value="/favoris/check", method = RequestMethod.GET)
+    public boolean isFavoris(@RequestParam(value="codeUtilisateur") Long codeUtilisateur, @RequestParam(value="codeCircuit") Long codeCircuit) {
+    	return favorisRepository.isFavoris(codeUtilisateur, codeCircuit) == 1;
+    }
+    
 
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Circuit")
+@Table(name="Favoris")
 public class Favoris {
 
     @Id
@@ -19,7 +19,7 @@ public class Favoris {
     @Column(name="Codeutilisateur")
     private Long codeUtilisateur;
     
-    @Column(name="CodeCircuit")
+    @Column(name="Codecircuit")
     private Long codeCircuit;
 
 	public Long getCode() {

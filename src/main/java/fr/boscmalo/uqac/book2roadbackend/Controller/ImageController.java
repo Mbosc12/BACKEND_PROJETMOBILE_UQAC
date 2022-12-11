@@ -30,7 +30,7 @@ public class ImageController {
     private CircuitRepository circuitRepository;
 
     @GetMapping("/images")
-    public List<Image> getAll(@RequestParam(value="code") Integer code) throws IOException {
+    public List<Image> getAll(@RequestParam(value="code") Long code) throws IOException {
         List<Image> listImage = imageRepository.getImageByCircuit(code);
         for(Image i : listImage) {
             Circuit c = circuitRepository.findCircuitsById(i.getCodeCircuit());
