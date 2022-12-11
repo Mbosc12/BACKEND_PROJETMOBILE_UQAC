@@ -49,6 +49,8 @@ public class CircuitController {
 	@Autowired UtilisateurRepository utilisateurRepository;
 	
 	@Autowired ReservationRepository reservationRepository;
+	
+	@Autowired FavorisRepository favorisRepository;
 
 	/**
 	 * Get all tracks
@@ -147,6 +149,7 @@ public class CircuitController {
 		List<Image> images = imageRepository.getImageByCircuit(c.getCode());
 		List<Avis> avis = avisRepository.findAvisFromCircuit(c.getCode());
 		List<Reservation> reservations = reservationRepository.findReservationByCircuit(c.getCode());
+		List<Favoris> favoris = favorisRepository.findFavorisByCircuit(c.getCode());
 		for(Image i : images) {
 			removeImage(i);
 			imageRepository.delete(i);
@@ -157,6 +160,10 @@ public class CircuitController {
 		
 		for(Reservation r : reservations) {
 			reservationRepository.delete(r);
+		}
+		
+		for(Favoris f : favoris) {
+			favorisRepository.delete(f);
 		}
 		
 		circuitRepository.delete(c);
