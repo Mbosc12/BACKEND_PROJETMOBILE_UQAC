@@ -47,8 +47,8 @@ public class FavorisController {
     }
     
     @RequestMapping(value="/favoris/check", method = RequestMethod.GET)
-    public boolean isFavoris(@RequestParam(value="codeUtilisateur") Long codeUtilisateur, @RequestParam(value="codeCircuit") Long codeCircuit) {
-    	return favorisRepository.isFavoris(codeUtilisateur, codeCircuit) == 1;
+    public Long isFavoris(@RequestParam(value="codeUtilisateur") Long codeUtilisateur, @RequestParam(value="codeCircuit") Long codeCircuit) {
+    	return (favorisRepository.isFavoris(codeUtilisateur, codeCircuit) == 1) ? favorisRepository.getId(codeUtilisateur, codeCircuit) : null;
     }
     
 
