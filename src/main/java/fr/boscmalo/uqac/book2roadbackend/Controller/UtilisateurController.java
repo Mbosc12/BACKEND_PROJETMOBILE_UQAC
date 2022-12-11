@@ -49,9 +49,24 @@ public class UtilisateurController {
         String encodedFile = Base64.getEncoder().encodeToString(bytes);
         u.setImage(encodedFile);
 
-        return utilisateurRepository.getUser(user);
+        return u;
     }
 
+    /**
+     * Get user info by his pseudo
+     * @param user
+     * @return
+     */
+    @GetMapping("/utilisateur/{code}")
+    public Utilisateur getUserById(@PathVariable Long code) throws IOException {
+        Utilisateur u = utilisateurRepository.getUserById(code);
+        byte[] bytes = Files.readAllBytes(Paths.get("C:\\\\image_projet_mobile\\\\" + u.getCode() + "\\\\userImage\\\\avatar.png"));
+        String encodedFile = Base64.getEncoder().encodeToString(bytes);
+        u.setImage(encodedFile);
+
+        return u;
+    }
+    
     /**
      * Check if user exist
      * @param user

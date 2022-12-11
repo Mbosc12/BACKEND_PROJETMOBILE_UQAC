@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -32,8 +33,16 @@ public class AvisController {
     }
     
     @RequestMapping(value="/avis", method= RequestMethod.GET)
-    public List<Avis> getAllByUser(@RequestParam(value="user") Long codeUser) {
-        return avisRepository.findAvisByUser(codeUser);
+    public List<Avis> getAllByUser(@RequestParam(value="user") int codeUser) {
+    	List<Circuit> listCircuit = circuitRepository.findCircuitsByUser(codeUser);
+    	List<Avis> avis = new ArrayList<>();
+    	
+    	for(Circuit c : listCircuit) {
+    		for(Avis a : avisRepository.findAvisFromCircuit(c.getCode())) {
+    			avis.add(a);
+    		}
+    	}
+        return avis;
     }
 
     @RequestMapping(value="/avis/average/{codeCircuit}", method = RequestMethod.GET)
