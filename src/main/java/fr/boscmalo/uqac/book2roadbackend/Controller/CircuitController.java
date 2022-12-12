@@ -27,6 +27,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
+import java.util.Random;
 
 @RestController
 public class CircuitController {
@@ -131,15 +132,17 @@ public class CircuitController {
 		v.setDepartement(d);
 		villeRepository.save(v);
 
-		c.setCodeRegion(d.getRegion().getCode());
-		circuitRepository.save(c);
-		
 		List<Image> images = imageRepository.getImageByCircuit(c.getCode());
 
+		//step 1 : supp bdd
+		//step 2 : rename
 		for(Image i : images) {
-			removeImage(i);
 			imageRepository.delete(i);
+			removeImage(i);
 		}
+
+		c.setCodeRegion(d.getRegion().getCode());
+		circuitRepository.save(c);
 		
 		return c.getCode();
 	}
@@ -175,9 +178,13 @@ public class CircuitController {
 	}
 
 	public void removeImage(Image i) throws IOException {
+		Random r = new Random();
 		Circuit c = circuitRepository.findCircuitsById(i.getCodeCircuit());
 		// path : idUser/idCircuit/idImage
-		String pathImage = c.getUtilisateur().getCode() + "\\\\" + c.getCode() + "\\\\";
-		Files.deleteIfExists(Paths.get("C:\\\\image_projet_mobile\\\\" + pathImage + i.getCode() + ".png"));
+		String pathImage ="C:\\\\image_projet_mobile\\\\" + c.getUtilisateur().getCode() + "\\\\" + c.getCode() + "\\\\" + i.getCode() + ".png";
+		File old = new File(pathImage);
+		File newOne = new File(pathImage+ r.nextInt(10000)*999+"");
+		old.renameTo(newOne);
 	}
+
 }
